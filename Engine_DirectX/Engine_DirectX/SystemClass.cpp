@@ -1,9 +1,11 @@
 ﻿#include "SystemClass.h"
 
 SystemClass::SystemClass() {
+	m_Application = 0;
 }
 
 SystemClass::SystemClass(const SystemClass& other) {
+	m_Application = 0;
 }
 
 SystemClass::~SystemClass() {
@@ -13,8 +15,10 @@ bool SystemClass::Initialize() {
 	int screenWidth, screenHeight;
 	screenWidth = 0;
 	screenHeight = 0;
+	m_Application = new Application;
 	InitializeWindows(screenWidth, screenHeight);
-	return true;
+	bool result = m_Application->Initialize(screenWidth, screenHeight, m_hwnd);
+	return result;
 }
 
 void SystemClass::Shutdown() {
@@ -77,7 +81,7 @@ void SystemClass::InitializeWindows(int& screenWidth, int& screenHeight) {
 	// Register the window class.
 	RegisterClassEx(&wc);
 
-	if (isFullScreen) { // If full screen set the screen to maximum size of the users desktop and 32bit.
+	if (m_Application->GetFullScreen()) { // If full screen set the screen to maximum size of the users desktop and 32bit.
 		// Determine the resolution of the clients desktop screen.
 		screenWidth = GetSystemMetrics(SM_CXSCREEN);
 		screenHeight = GetSystemMetrics(SM_CYSCREEN);

@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Singletons">
+      <UniqueIdentifier>{d036e3dd-8170-4b62-9ad9-18592e0e90ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Singletons\HeaderFiles">
+      <UniqueIdentifier>{5e904223-bc10-4571-8596-296e0b98b859}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Singletons\SourceFiles">
+      <UniqueIdentifier>{8511ec89-bf88-442e-bff4-c361ea097440}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseStructures">
+      <UniqueIdentifier>{fcb542f9-cfd3-4fc1-b793-9eaf3b22a1d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -21,10 +33,22 @@
     <ClCompile Include="SystemClass.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug.cpp">
+      <Filter>Singletons\SourceFiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SystemClass.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>Singletons\HeaderFiles</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

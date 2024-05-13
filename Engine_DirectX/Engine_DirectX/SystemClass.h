@@ -3,6 +3,7 @@
 #define WIN32_LEAN_AND_MEAN
 
 #include <windows.h>
+#include "Application.h"
 
 #pragma once
 class SystemClass {
@@ -26,6 +27,7 @@ private:
 	HWND m_hwnd;
 
 	bool isFullScreen;
+	Application* m_Application;
 };
 
 static LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam);
