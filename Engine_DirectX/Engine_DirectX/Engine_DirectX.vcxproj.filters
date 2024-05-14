@@ -30,25 +30,31 @@
     <ClCompile Include="main.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="SystemClass.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Application.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="Debug.cpp">
       <Filter>Singletons\SourceFiles</Filter>
     </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Singletons\SourceFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemClass.cpp">
+      <Filter>Singletons\SourceFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SystemClass.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Application.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="Debug.h">
       <Filter>Singletons\HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Singletons\HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemClass.h">
+      <Filter>Singletons\HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

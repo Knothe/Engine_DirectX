@@ -6,19 +6,21 @@
 #pragma once
 class Application {
 public:
-	Application();
-	Application(const Application& other);
+	static Application* GetPtr();
 	~Application();
 
 	bool Initialize(int screenWidth, int screenHeight, HWND hwnd);
 	void Shutdown();
 	bool Frame();
 
-	inline bool GetFullScreen() { return fullScreen; }
+	static inline bool GetFullScreen() { return GetPtr()->fullScreen; }
 
 private:
+	Application();
+
 	bool Render();
 
+	static Application* ptr;
 	bool fullScreen = false;
 	//bool vSyncEnabled = true;
 	//float screenDepth = 1000.0f;

@@ -1,11 +1,19 @@
 ﻿#include "SystemClass.h"
 
+SystemClass* SystemClass::ptr;
+
 SystemClass::SystemClass() {
 	m_Application = 0;
 }
 
 SystemClass::SystemClass(const SystemClass& other) {
 	m_Application = 0;
+}
+
+SystemClass* SystemClass::GetPtr() {
+	if (!ptr)
+		ptr = new SystemClass;
+	return ptr;
 }
 
 SystemClass::~SystemClass() {
@@ -15,7 +23,9 @@ bool SystemClass::Initialize() {
 	int screenWidth, screenHeight;
 	screenWidth = 0;
 	screenHeight = 0;
-	m_Application = new Application;
+	m_Application = Application::GetPtr();
+	m_Input = Input::GetPtr();
+	m_Input->Initialize();
 	InitializeWindows(screenWidth, screenHeight);
 	bool result = m_Application->Initialize(screenWidth, screenHeight, m_hwnd);
 	return result;
@@ -44,12 +54,25 @@ void SystemClass::Run() {
 		if (msg.message == WM_QUIT) {
 			done = true;
 		}
+		else {
+			result = Frame();
+			if (!result)
+				done = true;
+		}
 	}
 	return;
 }
 
 LRESULT SystemClass::MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam) {
 	switch (umsg) {
+		case WM_KEYDOWN: {
+			m_Input->KeyDown((unsigned int)wparam);
+			return 0;
+		}
+		case WM_KEYUP: {
+			m_Input->KeyUp((unsigned int)wparam);
+			return 0;
+		}
 		default:
 			return DefWindowProc(hwnd, umsg, wparam, lparam);
 	}
@@ -125,7 +148,7 @@ void SystemClass::InitializeWindows(int& screenWidth, int& screenHeight) {
 
 void SystemClass::ShutdownWindows() {
 	ShowCursor(true);
-	if (isFullScreen) { // Fix the display settings if leaving full screen mode.
+	if (m_Application->GetFullScreen()) { // Fix the display settings if leaving full screen mode.
 		ChangeDisplaySettings(NULL, 0);
 	}
 	DestroyWindow(m_hwnd);
@@ -134,6 +157,21 @@ void SystemClass::ShutdownWindows() {
 	m_hinstance = NULL;
 	ApplicationHandle = NULL;
 	return;
+}
+
+bool SystemClass::Frame() {
+	bool result;
+	// Check if the user pressed escape and wants to exit the application.
+	if (Input::IsKeyDown(VK_ESCAPE)) {
+		return false;
+	}
+
+	// Do the frame processing for the application class object.
+	result = m_Application->Frame();
+	if (!result) {
+		return false;
+	}
+	return true;
 }
 
 LRESULT WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam) {

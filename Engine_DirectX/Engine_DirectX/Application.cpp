@@ -1,9 +1,14 @@
 #include "Application.h"
 
+Application* Application::ptr;
+
 Application::Application() {
 }
 
-Application::Application(const Application& other) {
+Application* Application::GetPtr() {
+    if (!ptr)
+        ptr = new Application;
+    return ptr;
 }
 
 Application::~Application() {

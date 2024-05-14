@@ -4,14 +4,13 @@
 
 #include <windows.h>
 #include "Application.h"
+#include "Input.h"
 
 #pragma once
 class SystemClass {
 public:
-	SystemClass();
-	SystemClass(const SystemClass& other);
+	static SystemClass* GetPtr();
 	~SystemClass();
-
 	bool Initialize();
 	void Shutdown();
 	void Run();
@@ -19,15 +18,21 @@ public:
 	LRESULT CALLBACK MessageHandler(HWND hwnd, UINT umsg, WPARAM wparam, LPARAM lparam);
 
 private:
-	void InitializeWindows(int& screenWidth, int& screenHeight);
-	void ShutdownWindows();
+	static SystemClass* ptr;
 
 	LPCWSTR m_applicationName;
 	HINSTANCE m_hinstance;
 	HWND m_hwnd;
 
-	bool isFullScreen;
 	Application* m_Application;
+	Input* m_Input;
+
+	SystemClass();
+	SystemClass(const SystemClass& other);
+
+	void InitializeWindows(int& screenWidth, int& screenHeight);
+	void ShutdownWindows();
+	bool Frame();
 };
 
 static LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam);
